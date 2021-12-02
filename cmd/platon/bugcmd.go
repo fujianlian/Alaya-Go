@@ -26,10 +26,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/PlatONnetwork/PlatON-Go/cmd/internal/browser"
-	"github.com/PlatONnetwork/PlatON-Go/params"
+	"github.com/AlayaNetwork/Alaya-Go/cmd/internal/browser"
+	"github.com/AlayaNetwork/Alaya-Go/params"
 
-	"github.com/PlatONnetwork/PlatON-Go/cmd/utils"
+	"github.com/AlayaNetwork/Alaya-Go/cmd/utils"
 	cli "gopkg.in/urfave/cli.v1"
 )
 
@@ -41,7 +41,7 @@ var bugCommand = cli.Command{
 	Category:  "MISCELLANEOUS COMMANDS",
 }
 
-const issueURL = "https://github.com/PlatONnetwork/PlatON-Go/issues/new"
+const issueURL = "https://github.com/AlayaNetwork/Alaya-Go/issues/new"
 
 // reportBug reports a bug by opening a new URL to the go-ethereum GH issue
 // tracker and setting default values as the issue body.

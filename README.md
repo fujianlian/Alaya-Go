@@ -22,7 +22,7 @@ sudo apt install libgmp-dev libssl-dev
 Then, clone the repository
 
 ```
-git clone https://github.com/PlatONnetwork/PlatON-Go.git --recursive
+git clone https://github.com/AlayaNetwork/Alaya-Go.git --recursive
 ```
 
 Switch to the PlatON-Go repository root directory.
@@ -134,7 +134,7 @@ For more information, please visit our [Docs](https://platonnetwork.github.io/Do
 
 ## Contributing to PlatON-Go
 
-All of codes for PlatON-Go are open source and contributing are very welcome! Before beginning, please take a look at our contributing [guidelines](https://github.com/PlatONnetwork/PlatON-Go/blob/master/.github/CONTRIBUTING.md). You can also open an issue by clicking [here](https://github.com/PlatONnetwork/PlatON-Go/issues/new).
+All of codes for PlatON-Go are open source and contributing are very welcome! Before beginning, please take a look at our contributing [guidelines](https://github.com/AlayaNetwork/Alaya-Go/blob/master/.github/CONTRIBUTING.md). You can also open an issue by clicking [here](https://github.com/AlayaNetwork/Alaya-Go/issues/new).
 
 ## Support
 If you have any questions or suggestions please contact us at support@platon.network.

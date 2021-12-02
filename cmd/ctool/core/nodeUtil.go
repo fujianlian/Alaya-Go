@@ -29,7 +29,7 @@ import (
 
 	"github.com/docker/docker/pkg/reexec"
 
-	"github.com/PlatONnetwork/PlatON-Go/internal/cmdtest"
+	"github.com/AlayaNetwork/Alaya-Go/internal/cmdtest"
 	"github.com/stretchr/testify/assert"
 )
 

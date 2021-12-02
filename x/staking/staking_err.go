@@ -16,7 +16,7 @@
 
 package staking
 
-import "github.com/PlatONnetwork/PlatON-Go/common"
+import "github.com/AlayaNetwork/Alaya-Go/common"
 
 var (
 	ErrWrongBlsPubKey            = common.NewBizError(301000, "Wrong bls public key")

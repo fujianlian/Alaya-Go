@@ -22,26 +22,26 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/PlatONnetwork/PlatON-Go/x/gov"
+	"github.com/AlayaNetwork/Alaya-Go/x/gov"
 	"io"
 	"math/big"
 	"os"
 	"strings"
 
-	"github.com/PlatONnetwork/PlatON-Go/core/snapshotdb"
+	"github.com/AlayaNetwork/Alaya-Go/core/snapshotdb"
 
-	"github.com/PlatONnetwork/PlatON-Go/common"
-	"github.com/PlatONnetwork/PlatON-Go/common/hexutil"
-	"github.com/PlatONnetwork/PlatON-Go/common/math"
-	"github.com/PlatONnetwork/PlatON-Go/common/vm"
-	"github.com/PlatONnetwork/PlatON-Go/core/rawdb"
-	"github.com/PlatONnetwork/PlatON-Go/core/state"
-	"github.com/PlatONnetwork/PlatON-Go/core/types"
-	"github.com/PlatONnetwork/PlatON-Go/ethdb"
-	"github.com/PlatONnetwork/PlatON-Go/log"
-	"github.com/PlatONnetwork/PlatON-Go/params"
-	"github.com/PlatONnetwork/PlatON-Go/rlp"
-	"github.com/PlatONnetwork/PlatON-Go/x/xcom"
+	"github.com/AlayaNetwork/Alaya-Go/common"
+	"github.com/AlayaNetwork/Alaya-Go/common/hexutil"
+	"github.com/AlayaNetwork/Alaya-Go/common/math"
+	"github.com/AlayaNetwork/Alaya-Go/common/vm"
+	"github.com/AlayaNetwork/Alaya-Go/core/rawdb"
+	"github.com/AlayaNetwork/Alaya-Go/core/state"
+	"github.com/AlayaNetwork/Alaya-Go/core/types"
+	"github.com/AlayaNetwork/Alaya-Go/ethdb"
+	"github.com/AlayaNetwork/Alaya-Go/log"
+	"github.com/AlayaNetwork/Alaya-Go/params"
+	"github.com/AlayaNetwork/Alaya-Go/rlp"
+	"github.com/AlayaNetwork/Alaya-Go/x/xcom"
 )
 
 //go:generate gencodec -type GenesisAccount -field-override genesisAccountMarshaling -out gen_genesis_account.go
@@ -158,7 +158,7 @@ func SetupGenesisBlock(db ethdb.Database, snapshotBaseDB snapshotdb.BaseDB, gene
 		} else {
 			log.Info("Writing custom genesis block", "chainID", genesis.Config.ChainID)
 		}
-		if genesis.Config.ChainID.Cmp(params.MainnetChainConfig.ChainID) == 0 || genesis.Config.ChainID.Cmp(params.AlayaChainConfig.ChainID) == 0 {
+		if genesis.Config.ChainID.Cmp(params.AlayaTestChainConfig.ChainID) == 0 || genesis.Config.ChainID.Cmp(params.AlayaChainConfig.ChainID) == 0 {
 			common.SetAddressPrefix(common.MainNetAddressPrefix)
 		} else {
 			common.SetAddressPrefix(common.TestNetAddressPrefix)
@@ -192,7 +192,7 @@ func SetupGenesisBlock(db ethdb.Database, snapshotBaseDB snapshotdb.BaseDB, gene
 	storedcfg := rawdb.ReadChainConfig(db, stored)
 	if storedcfg == nil {
 		log.Warn("Found genesis block without chain config")
-		if newcfg.ChainID.Cmp(params.MainnetChainConfig.ChainID) == 0 || newcfg.ChainID.Cmp(params.AlayaChainConfig.ChainID) == 0 {
+		if newcfg.ChainID.Cmp(params.AlayaTestChainConfig.ChainID) == 0 || newcfg.ChainID.Cmp(params.AlayaChainConfig.ChainID) == 0 {
 			common.SetAddressPrefix(common.MainNetAddressPrefix)
 		} else {
 			common.SetAddressPrefix(common.TestNetAddressPrefix)
@@ -202,13 +202,13 @@ func SetupGenesisBlock(db ethdb.Database, snapshotBaseDB snapshotdb.BaseDB, gene
 	}
 
 	if genesis == nil && stored != params.MainnetGenesisHash {
-		if storedcfg.ChainID.Cmp(params.MainnetChainConfig.ChainID) == 0 || storedcfg.ChainID.Cmp(params.AlayaChainConfig.ChainID) == 0 {
+		if storedcfg.ChainID.Cmp(params.AlayaTestChainConfig.ChainID) == 0 || storedcfg.ChainID.Cmp(params.AlayaChainConfig.ChainID) == 0 {
 			common.SetAddressPrefix(common.MainNetAddressPrefix)
 		} else {
 			common.SetAddressPrefix(common.TestNetAddressPrefix)
 		}
 	} else {
-		if newcfg.ChainID.Cmp(params.MainnetChainConfig.ChainID) == 0 || newcfg.ChainID.Cmp(params.AlayaChainConfig.ChainID) == 0 {
+		if newcfg.ChainID.Cmp(params.AlayaTestChainConfig.ChainID) == 0 || newcfg.ChainID.Cmp(params.AlayaChainConfig.ChainID) == 0 {
 			common.SetAddressPrefix(common.MainNetAddressPrefix)
 		} else {
 			common.SetAddressPrefix(common.TestNetAddressPrefix)
@@ -290,7 +290,7 @@ func (g *Genesis) InitGenesisAndSetEconomicConfig(path string) error {
 	if err != nil {
 		return err
 	}
-	if chainID != nil && (chainID.Cmp(params.MainnetChainConfig.ChainID) == 0 || chainID.Cmp(params.AlayaChainConfig.ChainID) == 0) {
+	if chainID != nil && (chainID.Cmp(params.AlayaTestChainConfig.ChainID) == 0 || chainID.Cmp(params.AlayaChainConfig.ChainID) == 0) {
 		common.SetAddressPrefix(common.MainNetAddressPrefix)
 	} else {
 		common.SetAddressPrefix(common.TestNetAddressPrefix)
@@ -536,7 +536,7 @@ func DefaultGenesisBlock() *Genesis {
 	rewardMgrPoolIssue, _ := new(big.Int).SetString("2000000000000000000000000", 10)
 
 	genesis := Genesis{
-		Config:    params.MainnetChainConfig,
+		Config:    params.AlayaChainConfig,
 		Nonce:     hexutil.MustDecode("0x024c6378c176ef6c717cd37a74c612c9abd615d13873ff6651e3d352b31cb0b2e1"),
 		Timestamp: 0,
 		ExtraData: hexutil.MustDecode("0xd782070186706c61746f6e86676f312e3131856c696e757800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"),
